@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>명조: 워더링 웨이브 금주 & 몽주 공명자 마스터 가이드</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        wuwa: {
+                            bg: '#080a0f',
+                            card: '#0f141f',
+                            border: '#1e293b',
+                            gold: '#fbbf24',
+                            cyan: '#06b6d4',
+                            jade: '#10b981',
+                            spectro: '#f59e0b',
+                            fusion: '#f97316',
+                            aero: '#10b981',
+                            glacio: '#3b82f6',
+                            electro: '#a855f7',
+                            havoc: '#f43f5e'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Pretendard', sans-serif; background-color: #080a0f; color: #f1f5f9; }
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #080a0f; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #fbbf24; }
+        .gold-glow { text-shadow: 0 0 12px rgba(251, 191, 36, 0.4); }
+        .jade-glow { text-shadow: 0 0 12px rgba(16, 185, 129, 0.4); }
+        .card-glow:hover { box-shadow: 0 0 20px rgba(251, 191, 36, 0.2); border-color: rgba(251, 191, 36, 0.5); }
+        .glass-panel { background: linear-gradient(135deg, rgba(15, 20, 31, 0.9) 0%, rgba(8, 10, 15, 0.8) 100%); backdrop-filter: blur(8px); }
+    </style>
+</head>
+<body class="min-h-full flex flex-col custom-scrollbar text-slate-100">
+
+    <header class="sticky top-0 z-40 bg-[#080a0f]/90 backdrop-blur-md border-b border-[#1e293b]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-emerald-500 to-cyan-500 flex items-center justify-center text-slate-950 font-bold text-xl shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-yin-yang"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-sm sm:text-base leading-tight font-orbitron tracking-wide text-white flex items-center gap-2">
+                        WUTHERING WAVES <span class="text-amber-400">JINZHOU</span> & <span class="text-emerald-400">MENGZHOU</span>
+                    </h1>
+                    <span class="text-xs text-slate-400">명조: 금주(錦州) & 몽주·현방(夢州) 공명자 종합 가이드</span>
+                </div>
+            </div>
+
+            <!-- Desktop Nav Tab Bar -->
+            <nav class="hidden md:flex space-x-1 bg-[#0f141f] p-1 rounded-xl border border-[#1e293b]">
+                <button onclick="switchTab('roster')" id="tabBtn-roster" class="nav-tab px-4 py-1.5 rounded-lg text-sm font-medium transition text-amber-300 bg-amber-950/40 border border-amber-500/40">
+                    <i class="fa-solid fa-users mr-1.5"></i> 공명자 도감
+                </button>
+                <button onclick="switchTab('teambuilder')" id="tabBtn-teambuilder" class="nav-tab px-4 py-1.5 rounded-lg text-sm font-medium transition text-slate-400 hover:text-slate-200">
+                    <i class="fa-solid fa-diagram-project mr-1.5"></i> 팀 시너지
+                </button>
+                <button onclick="switchTab('echoes')" id="tabBtn-echoes" class="nav-tab px-4 py-1.5 rounded-lg text-sm font-medium transition text-slate-400 hover:text-slate-200">
+                    <i class="fa-solid fa-dragon mr-1.5"></i> 에코 시뮬레이터
+                </button>
+                <button onclick="switchTab('calculator')" id="tabBtn-calculator" class="nav-tab px-4 py-1.5 rounded-lg text-sm font-medium transition text-slate-400 hover:text-slate-200">
+                    <i class="fa-solid fa-calculator mr-1.5"></i> 육성 계산기
+                </button>
+            </nav>
+
+            <button onclick="toggleFavoriteFilter()" id="favFilterBtn" class="px-3 py-1.5 rounded-xl border border-[#1e293b] bg-[#0f141f] text-xs font-medium hover:border-amber-400 transition text-slate-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-star text-amber-400"></i>
+                <span>즐겨찾기</span>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Bar -->
+        <div class="md:hidden flex justify-around bg-[#0f141f] border-t border-[#1e293b] py-2 px-1 text-xs">
+            <button onclick="switchTab('roster')" id="mobTabBtn-roster" class="flex flex-col items-center py-1 text-amber-400">
+                <i class="fa-solid fa-users text-base mb-0.5"></i> 도감
+            </button>
+            <button onclick="switchTab('teambuilder')" id="mobTabBtn-teambuilder" class="flex flex-col items-center py-1 text-slate-400">
+                <i class="fa-solid fa-diagram-project text-base mb-0.5"></i> 시너지
+            </button>
+            <button onclick="switchTab('echoes')" id="mobTabBtn-echoes" class="flex flex-col items-center py-1 text-slate-400">
+                <i class="fa-solid fa-dragon text-base mb-0.5"></i> 에코
+            </button>
+            <button onclick="switchTab('calculator')" id="mobTabBtn-calculator" class="flex flex-col items-center py-1 text-slate-400">
+                <i class="fa-solid fa-calculator text-base mb-0.5"></i> 계산기
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- TAB 1: RESONATOR ROSTER -->
+        <section id="tab-roster" class="tab-content space-y-6">
+            <!-- Filter Controls -->
+            <div class="glass-panel p-4 rounded-2xl border border-[#1e293b] space-y-4">
+                <!-- Region Filter Tabs -->
+                <div class="flex flex-wrap gap-2 pb-3 border-b border-[#1e293b]">
+                    <span class="text-xs font-bold text-slate-400 flex items-center mr-2"><i class="fa-solid fa-map-location-dot mr-1"></i> 지역:</span>
+                    <button onclick="setRegionFilter('ALL')" class="region-btn active px-3 py-1 rounded-xl text-xs font-semibold bg-amber-950/60 border border-amber-500/50 text-amber-300">전체 지역</button>
+                    <button onclick="setRegionFilter('금주')" class="region-btn px-3 py-1 rounded-xl text-xs font-semibold bg-[#080a0f] border border-[#1e293b] text-slate-400 hover:text-slate-200">금주 (錦州)</button>
+                    <button onclick="setRegionFilter('몽주·현방')" class="region-btn px-3 py-1 rounded-xl text-xs font-semibold bg-[#080a0f] border border-[#1e293b] text-slate-400 hover:text-slate-200">몽주·현방 (夢州)</button>
+                    <button onclick="setRarityFilter('5★')" class="rarity-btn px-3 py-1 rounded-xl text-xs font-semibold bg-[#080a0f] border border-[#1e293b] text-amber-400 hover:border-amber-500/50">★5 공명자</button>
+                    <button onclick="setRarityFilter('4★')" class="rarity-btn px-3 py-1 rounded-xl text-xs font-semibold bg-[#080a0f] border border-[#1e293b] text-purple-400 hover:border-purple-500/50">★4 공명자</button>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-between items-center">
+                    <!-- Search Input -->
+                    <div class="relative w-full sm:w-80">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input type="text" id="searchInput" oninput="applyFilters()" placeholder="공명자 이름 또는 무기 검색..." class="w-full pl-9 pr-4 py-2 bg-[#080a0f] border border-[#1e293b] rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-400">
+                    </div>
+
+                    <!-- Role Filters -->
+                    <div class="flex flex-wrap gap-1.5 w-full sm:w-auto text-xs">
+                        <button onclick="setRoleFilter('ALL')" class="role-btn active px-3 py-1.5 rounded-lg border border-[#1e293b] bg-[#080a0f] text-slate-300">전체 포지션</button>
+                        <button onclick="setRoleFilter('메인 딜러')" class="role-btn px-3 py-1.5 rounded-lg border border-[#1e293b] bg-[#080a0f] text-slate-400">메인 딜러</button>
+                        <button onclick="setRoleFilter('서브 딜러')" class="role-btn px-3 py-1.5 rounded-lg border border-[#1e293b] bg-[#080a0f] text-slate-400">서브 딜러 / 서포터</button>
+                        <button onclick="setRoleFilter('힐러')" class="role-btn px-3 py-1.5 rounded-lg border border-[#1e293b] bg-[#080a0f] text-slate-400">힐러 / 서포터</button>
+                    </div>
+                </div>
+
+                <!-- Element Filter Chips -->
+                <div class="flex flex-wrap items-center gap-1.5 pt-1 text-xs">
+                    <span class="text-slate-400 font-medium mr-1">속성:</span>
+                    <button onclick="setElementFilter('ALL')" class="elem-btn active px-2.5 py-1 rounded-lg border border-amber-500/50 bg-amber-950/40 text-amber-300">전체</button>
+                    <button onclick="setElementFilter('회절')" class="elem-btn px-2.5 py-1 rounded-lg border border-[#1e293b] bg-[#080a0f] text-amber-300">회절 (Spectro)</button>
+                    <button onclick="setElementFilter('용융')" class="elem-btn px-2.5 py-1 rounded-lg border border-[#1e293b] bg-[#080a0f] text-orange-300">용융 (Fusion)</button>
+                    <button onclick="setElementFilter('기류')" class="elem-btn px-2.5 py-1 rounded-lg border border-[#1e293b] bg-[#080a0f] text-emerald-300">기류 (Aero)</button>
+                    <button onclick="setElementFilter('응결')" class="elem-btn px-2.5 py-1 rounded-lg border border-[#1e293b] bg-[#080a0f] text-blue-300">응결 (Glacio)</button>
+                    <button onclick="setElementFilter('전도')" class="elem-btn px-2.5 py-1 rounded-lg border border-[#1e293b] bg-[#080a0f] text-purple-300">전도 (Electro)</button>
+                    <button onclick="setElementFilter('인멸')" class="elem-btn px-2.5 py-1 rounded-lg border border-[#1e293b] bg-[#080a0f] text-rose-300">인멸 (Havoc)</button>
+                </div>
+            </div>
+
+            <!-- Resonators Grid -->
+            <div id="resonatorGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </section>
+
+        <!-- TAB 2: TEAM SYNERGY BUILDER -->
+        <section id="tab-teambuilder" class="tab-content hidden space-y-6">
+            <div class="glass-panel p-6 rounded-2xl border border-[#1e293b]">
+                <h2 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-diagram-project text-amber-400"></i> 금주 & 몽주 파티 시너지 조합기
+                </h2>
+                <p class="text-sm text-slate-400 mb-6">메인 딜러, 서브 딜러, 서포터를 배치하여 반주(Outro) 스킬 및 변주(Intro) 스킬 연계와 파티 버프 효과를 분석하세요.</p>
+
+                <!-- 3 Resonator Team Slots -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                    <!-- Slot 1 -->
+                    <div class="bg-[#080a0f] p-4 rounded-xl border border-amber-500/40 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-bold text-amber-400">
+                            <span>슬롯 1 (메인 딜러)</span>
+                            <i class="fa-solid fa-burst"></i>
+                        </div>
+                        <select id="teamSlot0" onchange="updateTeamSynergy()" class="w-full bg-[#0f141f] border border-[#1e293b] rounded-lg px-2.5 py-2 text-xs text-white">
+                            <!-- Populated -->
+                        </select>
+                        <div id="teamCard0" class="min-h-[110px] flex items-center justify-center p-3 bg-[#0f141f] rounded-lg border border-[#1e293b]"></div>
+                    </div>
+
+                    <!-- Slot 2 -->
+                    <div class="bg-[#080a0f] p-4 rounded-xl border border-emerald-500/40 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-bold text-emerald-400">
+                            <span>슬롯 2 (서브 딜러 / 서포터)</span>
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <select id="teamSlot1" onchange="updateTeamSynergy()" class="w-full bg-[#0f141f] border border-[#1e293b] rounded-lg px-2.5 py-2 text-xs text-white">
+                            <!-- Populated -->
+                        </select>
+                        <div id="teamCard1" class="min-h-[110px] flex items-center justify-center p-3 bg-[#0f141f] rounded-lg border border-[#1e293b]"></div>
+                    </div>
+
+                    <!-- Slot 3 -->
+                    <div class="bg-[#080a0f] p-4 rounded-xl border border-cyan-500/40 space-y-3">
+                        <div class="flex justify-between items-center text-xs font-bold text-cyan-400">
+                            <span>슬롯 3 (서포터 / 힐러)</span>
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <select id="teamSlot2" onchange="updateTeamSynergy()" class="w-full bg-[#0f141f] border border-[#1e293b] rounded-lg px-2.5 py-2 text-xs text-white">
+                            <!-- Populated -->
+                        </select>
+                        <div id="teamCard2" class="min-h-[110px] flex items-center justify-center p-3 bg-[#0f141f] rounded-lg border border-[#1e293b]"></div>
+                    </div>
+                </div>
+
+                <!-- Synergy Analysis Summary -->
+                <div class="bg-[#080a0f] p-5 rounded-xl border border-[#1e293b] space-y-4">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 pb-3 border-b border-[#1e293b]">
+                        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-amber-400"></i> 반주 스킬 연계 & 속성 시너지 평가
+                        </h3>
+                        <div id="synergyScoreBadge" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-950/60 border border-amber-500/40 text-amber-300">
+                            시너지 등급: S+
+                        </div>
+                    </div>
+
+                    <div id="teamSynergyDetails" class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                        <!-- Dynamic analysis inserted via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: ECHO LOADOUT SIMULATOR -->
+        <section id="tab-echoes" class="tab-content hidden space-y-6">
+            <div class="glass-panel p-6 rounded-2xl border border-[#1e293b]">
+                <h2 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-dragon text-amber-400"></i> 주에코(Main Echo) 및 세트 효과 시뮬레이터
+                </h2>
+                <p class="text-sm text-slate-400 mb-6">금주 및 몽주 지역의 주요 4코스트 주에코의 전용 스킬과 5세트 이펙트 버프를 확인하세요.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Left: Select Echo -->
+                    <div class="space-y-4 bg-[#080a0f] p-4 rounded-xl border border-[#1e293b]">
+                        <label class="block text-xs font-bold text-amber-400 uppercase tracking-wider">주에코(COST 4) 선택</label>
+                        <select id="mainEchoSelect" onchange="renderEchoDetails()" class="w-full bg-[#0f141f] border border-[#1e293b] rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400">
+                            <option value="jue">용의 승천자 - 스승 용 (角 / Jue) [회절]</option>
+                            <option value="inferno">지옥불 기사 (Inferno Rider) [용융]</option>
+                            <option value="mephis">뇌음의 메피스 (Thundering Mephis) [전도]</option>
+                            <option value="crownless">무망자 (Crownless) [인멸]</option>
+                            <option value="feilian">기류의 집행자 (Feilian Beringal) [기류]</option>
+                            <option value="bell_borne">종소리의 카메리아 (Bell-Borne Geochelone) [응결/보호]</option>
+                            <option value="xuanfang">현방 기계룡 (Xuanfang Mecha) [몽주 신규/전도]</option>
+                        </select>
+
+                        <div class="pt-3 border-t border-[#1e293b] space-y-3">
+                            <label class="block text-xs font-semibold text-slate-300">에코 코스트 구성 선택</label>
+                            <div class="flex gap-2">
+                                <button onclick="setEchoCostConfig('43311')" id="costConfig43311" class="flex-1 py-1.5 rounded-lg border border-amber-500/50 bg-amber-950/40 text-amber-300 text-xs font-bold">4-3-3-1-1 (표준)</button>
+                                <button onclick="setEchoCostConfig('44111')" id="costConfig44111" class="flex-1 py-1.5 rounded-lg border border-[#1e293b] bg-[#0f141f] text-slate-400 text-xs font-bold">4-4-1-1-1 (극딜)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Echo Details Display -->
+                    <div id="echoDetailDisplay" class="lg:col-span-2 bg-[#080a0f] p-5 rounded-xl border border-[#1e293b] space-y-4">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: RESOURCE CALCULATOR -->
+        <section id="tab-calculator" class="tab-content hidden space-y-6">
+            <div class="glass-panel p-6 rounded-2xl border border-[#1e293b]">
+                <h2 class="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-calculator text-amber-400"></i> 공명자 육성 재화 계산기
+                </h2>
+                <p class="text-sm text-slate-400 mb-6">금주 및 몽주 공명자 돌파 재료, 클렘 클럽 코인, 고급 공명 물약 및 스킬 트레이스 재료를 계산합니다.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Left Control Panel -->
+                    <div class="space-y-4 bg-[#080a0f] p-4 rounded-xl border border-[#1e293b]">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">육성할 공명자 선택</label>
+                            <select id="calcCharSelect" onchange="updateCalcResults()" class="w-full bg-[#0f141f] border border-[#1e293b] rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400">
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+
+                        <!-- Level Slider -->
+                        <div class="space-y-2 pt-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-400">목표 레벨</span>
+                                <span id="targetLvLabel" class="text-amber-400 font-bold">Lv. 90</span>
+                            </div>
+                            <input type="range" id="calcTargetLv" min="20" max="90" step="10" value="90" oninput="updateCalcResults()" class="w-full accent-amber-400 bg-[#0f141f] rounded-lg">
+                        </div>
+
+                        <!-- Skill Level Settings -->
+                        <div class="border-t border-[#1e293b] pt-3 space-y-3">
+                            <label class="block text-xs font-semibold text-slate-300">스킬 트레이스 목표</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs text-slate-400 mb-1">현재 스킬</label>
+                                    <input type="number" id="calcTraceStart" min="1" max="10" value="1" onchange="updateCalcResults()" class="w-full bg-[#0f141f] border border-[#1e293b] rounded-lg px-3 py-1.5 text-xs text-white">
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-amber-400 mb-1">목표 스킬</label>
+                                    <input type="number" id="calcTraceTarget" min="1" max="10" value="10" onchange="updateCalcResults()" class="w-full bg-[#0f141f] border border-amber-500/50 rounded-lg px-3 py-1.5 text-xs text-white">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Output Panel -->
+                    <div class="lg:col-span-2 bg-[#080a0f] p-5 rounded-xl border border-[#1e293b] flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-sm font-semibold text-slate-300 mb-4 pb-2 border-b border-[#1e293b] flex items-center justify-between">
+                                <span><i class="fa-solid fa-boxes-packing text-amber-400 mr-2"></i> 총 육성 필요 재화 종합</span>
+                                <span id="selectedCharBadge" class="text-xs text-amber-300 bg-amber-950/60 border border-amber-500/30 px-2.5 py-0.5 rounded-full font-bold"></span>
+                            </h3>
+
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="matResultsGrid">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="mt-6 p-3 bg-[#0f141f] rounded-xl border border-amber-500/30 text-xs text-amber-200/80 flex items-start gap-2">
+                            <i class="fa-solid fa-circle-info text-amber-400 text-sm mt-0.5"></i>
+                            <span>전용 무기 90레벨 돌파 시 클렘 클럽 코인 약 120만 및 주간 필드 보스 재료가 추가 소모됩니다.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Detailed Modal View -->
+    <div id="charModal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-200">
+        <div class="bg-[#0f141f] border border-[#1e293b] w-full max-w-3xl rounded-2xl p-6 shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar relative">
+            <button onclick="closeCharModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2 rounded-xl bg-[#080a0f] border border-[#1e293b]">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="modalContent">
+                <!-- Dynamically populated detail view -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Complete Database of Jinzhou (금주) & Mengzhou (몽주·현방) Resonators ---
+        const resonators = [
+            // Jinzhou (금주) 5-Stars
+            {
+                id: 'jinhsi',
+                name: '금희 (Jinhsi)',
+                rarity: '5★',
+                region: '금주',
+                element: '회절',
+                weapon: '대검',
+                role: '메인 딜러',
+                sigWeapon: '해의 빛 (5★)',
+                altWeapon: '청공의 중검 (5★) / 기류 대검 (4★)',
+                echoSet: '빛을 쫓는 별자리 5세트',
+                mainEcho: '용의 승천자 - 스승 용 (角 / Jue)',
+                mainStats: 'COST 4: 치명타 확률/피해 | COST 3: 회절 피해% x2 | COST 1: 공격력% x2',
+                subStats: '치명타 확률 > 치명타 피해 > 공명 해방 피해 > 공격력%',
+                skills: '공명 스킬 > 공명 해방 > 회로 공격 > 변주 스킬',
+                description: '금주(錦州)의 령주. 스승 용의 회절 능력을 다루며 공중에서 빛의 여의주 칼날을 폭발시키는 최상위 회절 메인 딜러.',
+                teamSynergy: ['절지', '음림', '설지'],
+                bgGradient: 'from-amber-500/20 to-yellow-600/5'
+            },
+            {
+                id: 'changli',
+                name: '장리 (Changli)',
+                element: '용융',
+                rarity: '5★',
+                region: '금주',
+                weapon: '직도',
+                role: '메인 딜러',
+                sigWeapon: '붉은 깃털의 칼날 (5★)',
+                altWeapon: '천둥의 각인 (5★) / 제타 블레이드 (4★)',
+                echoSet: '용암의 잔향 5세트',
+                mainEcho: '지옥불 기사 (Inferno Rider)',
+                mainStats: 'COST 4: 치명타 확률/피해 | COST 3: 용융 피해% x2 | COST 1: 공격력% x2',
+                subStats: '치명타 확률 > 치명타 피해 > 공명 스킬 피해 > 공명 효율',
+                skills: '공명 스킬 > 공명 회로 > 공명 해방 > 일반 공격',
+                description: '금주 령주의 참모. 붉은 불꽃의 봉황 형상을 모티브로 높은 기모 모션과 공중 스킬 연계를 자랑하는 용융 딜러.',
+                teamSynergy: ['앙앙', '모르테피', '치샤'],
+                bgGradient: 'from-orange-500/20 to-red-600/5'
+            },
+            {
+                id: 'jiyan',
+                name: '기염 (Jiyan)',
+                element: '기류',
+                rarity: '5★',
+                region: '금주',
+                weapon: '대검',
+                role: '메인 딜러',
+                sigWeapon: '청룡의 창 (5★)',
+                altWeapon: '청공의 중검 (5★) / 기류 진동검 (4★)',
+                echoSet: '바람을 가르는 사냥꾼 5세트',
+                mainEcho: '기류의 집행자 (Feilian Beringal)',
+                mainStats: 'COST 4: 치명타 확률 | COST 3: 기류 피해% x2 | COST 1: 공격력% x2',
+                subStats: '치명타 확률 > 치명타 피해 > 강공격 피해 > 공격력%',
+                skills: '공명 해방 > 공명 스킬 > 공명 회로 > 일반 공격',
+                description: '금주 야귀군 장군. 청룡의 형상을 한 창을 휘두르며 광역 적들을 끌어당기고 짓밟는 기류 특화 딜러.',
+                teamSynergy: ['모르테피', '산화', '설지'],
+                bgGradient: 'from-emerald-500/20 to-teal-600/5'
+            },
+            {
+                id: 'zhezhi',
+                name: '절지 (Zhezhi)',
+                element: '응결',
+                rarity: '5★',
+                region: '금주',
+                weapon: '증폭기',
+                role: '서브 딜러',
+                sigWeapon: '붓끝의 먹향 (5★)',
+                altWeapon: '변주 증폭기 (5★) / 붓꽃 (4★)',
+                echoSet: '구름의 자태 5세트 (버프) 또는 응결 5세트',
+                mainEcho: '종소리의 카메리아 (Bell-Borne Geochelone)',
+                mainStats: 'COST 4: 치명타 확률 | COST 3: 응결 피해% + 공명 효율% | COST 1: 공격력% x2',
+                subStats: '공명 효율 > 치명타 확률 > 치명타 피해 > 공명 스킬 피해',
+                skills: '공명 스킬 > 반주 스킬 > 공명 해방 > 변주 스킬',
+                description: '금주 천재 화가. 붓칠로 잉어 형상의 영수를 소환해 오프필드 응결 협동 공격 및 일반 공격 피증 버프 부여.',
+                teamSynergy: ['금희', '산화', '백지'],
+                bgGradient: 'from-blue-500/20 to-indigo-600/5'
+            },
+            {
+                id: 'xiangli_yao',
+                name: '상리요 (Xiangli Yao)',
+                element: '전도',
+                rarity: '5★',
+                region: '금주',
+                weapon: '장구',
+                role: '메인 딜러',
+                sigWeapon: '천재의 의수 (5★)',
+                altWeapon: '기계 번개 장구 (5★) / 공명 장구 (4★)',
+                echoSet: '벼락의 파동 5세트',
+                mainEcho: '뇌음의 메피스 (Thundering Mephis)',
+                mainStats: 'COST 4: 치명타 피해 | COST 3: 전도 피해% x2 | COST 1: 공격력% x2',
+                subStats: '치명타 피해 > 치명타 확률 > 공명 해방 피해 > 속도',
+                skills: '공명 해방 > 공명 스킬 > 공명 회로 > 일반 공격',
+                description: '금주 화술 연구원 수석 학자. 공학 의수를 활용해 매끄러운 전도 입자 제어 및 연계 레이저 폭격을 가하는 메인 딜러.',
+                teamSynergy: ['음림', '산화', '설지'],
+                bgGradient: 'from-purple-500/20 to-fuchsia-600/5'
+            },
+
+            // Mengzhou & Xuanfang (몽주·현방) 5-Stars
+            {
+                id: 'qiu_yuan',
+                name: '구원 (Qiu Yuan)',
+                element: '인멸',
+                rarity: '5★',
+                region: '몽주·현방',
+                weapon: '직도',
+                role: '메인 딜러',
+                sigWeapon: '몽환의 검 (5★)',
+                altWeapon: '천둥의 각인 (5★) / 제타 블레이드 (4★)',
+                echoSet: '인멸의 구름 5세트',
+                mainEcho: '무망자 (Crownless)',
+                mainStats: 'COST 4: 치명타 확률/피해 | COST 3: 인멸 피해% x2 | COST 1: 공격력% x2',
+                subStats: '치명타 확률 > 치명타 피해 > 인멸 피해% > 공명 효율',
+                skills: '공명 스킬 > 공명 해방 > 공명 회로 > 일반 공격',
+                description: '몽주·현방 지계 출신의 비밀 묵검객. 환영 벼랑을 가르며 연속 인멸 잔상을 발동시키는 강력한 몽주 메인 딜러.',
+                teamSynergy: ['복링', '양연', '도기'],
+                bgGradient: 'from-rose-500/20 to-slate-800/10'
+            },
+            {
+                id: 'fu_ling',
+                name: '복링 (Fu Ling)',
+                element: '전도',
+                rarity: '5★',
+                region: '몽주·현방',
+                weapon: '증폭기',
+                role: '서브 딜러',
+                sigWeapon: '현방 공명 장치 (5★)',
+                altWeapon: '변주 증폭기 (5★) / 하모니 (4★)',
+                echoSet: '구름의 자태 5세트',
+                mainEcho: '현방 기계룡 (Xuanfang Mecha)',
+                mainStats: 'COST 4: 치명타 피해 | COST 3: 전도 피해% + 공명 효율% | COST 1: 공격력% x2',
+                subStats: '공명 효율 > 치명타 확률 > 치명타 피해 > 속도',
+                skills: '반주 스킬 > 공명 스킬 > 공명 해방 > 일반 공격',
+                description: '몽주 현방 연구소 주임 학자. 오프필드 드론을 배치해 전도 지속 협동 타격과 파티원 스킬 쿨타임 단축 버프 제공.',
+                teamSynergy: ['상리요', '구원', '청초'],
+                bgGradient: 'from-purple-500/20 to-cyan-600/5'
+            },
+            {
+                id: 'qing_cao',
+                name: '청초 (Qing Cao)',
+                element: '기류',
+                rarity: '5★',
+                region: '몽주·현방',
+                weapon: '직도',
+                role: '메인 딜러',
+                sigWeapon: '청풍검 (5★)',
+                altWeapon: '천둥의 각인 (5★) / 기류검 (4★)',
+                echoSet: '바람을 가르는 사냥꾼 5세트',
+                mainEcho: '기류의 집행자 (Feilian Beringal)',
+                mainStats: 'COST 4: 치명타 확률 | COST 3: 기류 피해% x2 | COST 1: 공격력% x2',
+                subStats: '치명타 확률 > 치명타 피해 > 속도 > 공격력%',
+                skills: '공명 스킬 > 일반 공격 > 공명 해방 > 변주 스킬',
+                description: '몽주 검술 유파의 계승자. 눈에 보이지 않는 바람의 검기로 광역 적들을 가르고 유려한 돌진기 연계 극딜 가능.',
+                teamSynergy: ['복링', '양양', '설지'],
+                bgGradient: 'from-emerald-500/20 to-teal-700/5'
+            },
+            {
+                id: 'chisa',
+                name: '치사 (Chisa)',
+                element: '용융',
+                rarity: '5★',
+                region: '몽주·현방',
+                weapon: '권총',
+                role: '메인 딜러',
+                sigWeapon: '쌍둥이 화염 권총 (5★)',
+                altWeapon: '적염의 권총 (5★) / 버닝 블래스터 (4★)',
+                echoSet: '용암의 잔향 5세트',
+                mainEcho: '지옥불 기사 (Inferno Rider)',
+                mainStats: 'COST 4: 치명타 피해 | COST 3: 용융 피해% x2 | COST 1: 공격력% x2',
+                subStats: '치명타 피해 > 치명타 확률 > 일반 공격 피해 > 공명 효율',
+                skills: '일반 공격 > 공명 스킬 > 공명 해방 > 변주 스킬',
+                description: '몽주 현방 위험 지대 전담 수색대장. 권총과 단검을 번갈아 다루며 근접 화염 난사와 오프필드 유도 폭파 수행.',
+                teamSynergy: ['모르테피', '복링', '경연'],
+                bgGradient: 'from-orange-500/20 to-red-600/5'
+            },
+
+            // Jinzhou (금주) 4-Stars
+            {
+                id: 'sanhua',
+                name: '산화 (Sanhua)',
+                element: '응결',
+                rarity: '4★',
+                region: '금주',
+                weapon: '직도',
+                role: '서브 딜러',
+                sigWeapon: '천둥의 각인 (5★)',
+                altWeapon: '제타 블레이드 (4★)',
+                echoSet: '구름의 자태 5세트',
+                mainEcho: '종소리의 카메리아 (Bell-Borne Geochelone)',
+                mainStats: 'COST 4: 치명타 확률 | COST 3: 응결 피해% + 공명 효율% | COST 1: 공격력% x2',
+                subStats: '공명 효율 > 치명타 확률 > 일반 공격 피해',
+                skills: '반주 스킬 > 공명 스킬 > 공명 회로 > 공명 해방',
+                description: '금주 령주 직속 호위. 신속한 얼음 장판 터뜨리기로 순간 협동 딜과 다음 출전 캐릭터의 일반 공격 피증 제공.',
+                teamSynergy: ['기염', '금희', '상리요'],
+                bgGradient: 'from-blue-500/10 to-slate-800/10'
+            },
+            {
+                id: 'mortefi',
+                name: '모르테피 (Mortefi)',
+                element: '용융',
+                rarity: '4★',
+                region: '금주',
+                weapon: '권총',
+                role: '서브 딜러',
+                sigWeapon: '적염의 권총 (5★)',
+                altWeapon: '버닝 블래스터 (4★)',
+                echoSet: '용암의 잔향 또는 구름의 자태 5세트',
+                mainEcho: '지옥불 기사 (Inferno Rider)',
+                mainStats: 'COST 4: 치명타 피해 | COST 3: 용융 피해% + 공명 효율% | COST 1: 공격력% x2',
+                subStats: '공명 효율 > 치명타 확률 > 강공격 피해',
+                skills: '공명 해방 > 반주 스킬 > 공명 스킬 > 일반 공격',
+                description: '금주 연구원 학자. 강력한 오프필드 용융 유도 탄환 지원과 파티원의 강공격 피해% 증폭.',
+                teamSynergy: ['기염', '장리', '치사'],
+                bgGradient: 'from-orange-500/10 to-slate-800/10'
+            },
+            {
+                id: 'chixia',
+                name: '치샤 (Chixia)',
+                element: '용융',
+                rarity: '4★',
+                region: '금주',
+                weapon: '권총',
+                role: '메인 딜러',
+                sigWeapon: '적염의 권총 (5★)',
+                altWeapon: '버닝 블래스터 (4★)',
+                echoSet: '용암의 잔향 5세트',
+                mainEcho: '지옥불 기사 (Inferno Rider)',
+                mainStats: 'COST 4: 치명타 확률 | COST 3: 용융 피해% x2 | COST 1: 공격력% x2',
+                subStats: '치명타 확률 > 치명타 피해 > 공명 스킬 피해',
+                skills: '공명 스킬 > 일반 공격 > 공명 해방 > 변주 스킬',
+                description: '금주 순찰대원. 열정적인 쌍권총 기관총 난사 스킬로 강력한 용융 지속 피해를 주는 초반 입문 딜러.',
+                teamSynergy: ['장리', '모르테피', '설지'],
+                bgGradient: 'from-orange-500/10 to-slate-800/10'
+            },
+            {
+                id: 'yangyang',
+                name: '양양 (Yangyang)',
+                element: '기류',
+                rarity: '4★',
+                region: '금주',
+                weapon: '직도',
+                role: '서포터',
+                sigWeapon: '청풍검 (5★)',
+                altWeapon: '제타 블레이드 (4★)',
+                echoSet: '구름의 자태 5세트',
+                mainEcho: '기류의 집행자 (Feilian Beringal)',
+                mainStats: 'COST 4: 치명타 확률 | COST 3: 기류 피해% + 공명 효율% | COST 1: 공격력% x2',
+                subStats: '공명 효율 > 속도 > 치명타 확률',
+                skills: '공명 해방 > 공명 스킬 > 변주 스킬 > 일반 공격',
+                description: '금주 밤의 파수꾼. 바람 소용돌이로 몬스터 몰이 및 파티원의 공명 에너지 회복 배터리 역 할 수행.',
+                teamSynergy: ['청초', '장리', '기염'],
+                bgGradient: 'from-emerald-500/10 to-slate-800/10'
+            },
+            {
+                id: 'baizhi',
+                name: '설지 (Baizhi)',
+                element: '응결',
+                rarity: '4★',
+                region: '금주',
+                weapon: '증폭기',
+                role: '힐러',
+                sigWeapon: '변주 증폭기 (5★)',
+                altWeapon: '하모니 (4★)',
+                echoSet: '빛을 받는 전율 5세트 (치유)',
+                mainEcho: '종소리의 카메리아 (Bell-Borne Geochelone)',
+                mainStats: 'COST 4: 치유 보너스% | COST 3: 공명 효율% x2 | COST 1: HP% x2',
+                subStats: '공명 효율 > HP% > 속도',
+                skills: '공명 해방 > 공명 스킬 > 반주 스킬 > 일반 공격',
+                description: '금주 생명공학 학자. 영수 유포리아를 활용해 파티원 전체 치유 및 지속 피해 증가 버프 제공.',
+                teamSynergy: ['금희', '상리요', '기염'],
+                bgGradient: 'from-sky-500/10 to-slate-800/10'
+            },
+
+            // Mengzhou (몽주) 4-Stars
+            {
+                id: 'jing_yan',
+                name: '경연 (Jing Yan)',
+                element: '인멸',
+                rarity: '4★',
+                region: '몽주·현방',
+                weapon: '장구',
+                role: '메인 딜러',
+                sigWeapon: '기계 번개 장구 (5★)',
+                altWeapon: '공명 장구 (4★)',
+                echoSet: '인멸의 구름 5세트',
+                mainEcho: '무망자 (Crownless)',
+                mainStats: 'COST 4: 치명타 확률 | COST 3: 인멸 피해% x2 | COST 1: 공격력% x2',
+                subStats: '치명타 확률 > 치명타 피해 > 공격력%',
+                skills: '공명 스킬 > 일반 공격 > 공명 해방',
+                description: '몽주 탐사대 기계 탐험가. 인멸 속성 장구를 착용하고 와이어 타격과 근접 격투 난사를 선보이는 4성 딜러.',
+                teamSynergy: ['구원', '복링', '양연'],
+                bgGradient: 'from-rose-500/10 to-slate-800/10'
+            },
+            {
+                id: 'yang_yan',
+                name: '양연 (Yang Yan)',
+                element: '회절',
+                rarity: '4★',
+                region: '몽주·현방',
+                weapon: '증폭기',
+                role: '서포터',
+                sigWeapon: '변주 증폭기 (5★)',
+                altWeapon: '하모니 (4★)',
+                echoSet: '구름의 자태 5세트',
+                mainEcho: '용의 승천자 - 스승 용 (角 / Jue)',
+                mainStats: 'COST 4: 치명타 확률 | COST 3: 공명 효율% x2 | COST 1: HP% x2',
+                subStats: '공명 효율 > 속도 > HP%',
+                skills: '공명 스킬 > 반주 스킬 > 공명 해방',
+                description: '몽주 현방 신관. 회절 입자 보호막을 생성하고 출전 캐릭터에게 지속적인 스태미나 및 에너지 회복 지원.',
+                teamSynergy: ['구원', '청초', '치사'],
+                bgGradient: 'from-amber-500/10 to-slate-800/10'
+            }
+        ];
+
+        // --- Main Echo Data ---
+        const echoDatabase = {
+            jue: {
+                name: '용의 승천자 - 스승 용 (角 / Jue)',
+                element: '회절',
+                setEffect: '빛을 쫓는 별자리 5세트 (회절 피해 +10%, 회절 스킬 사용 후 회절 피해 +30%)',
+                skill: '스승 용을 소환하여 공중에서 신성한 회절 광선을 퍼붓고, 15초간 파티원의 회절 피해 및 공명 스킬 피해 +16% 증가.',
+                stats43311: 'COST 4 (치명타 33%) / COST 3 (회절 30% x2) / COST 1 (공격력 18% x2)',
+                stats44111: 'COST 4 (치명타 33% + 치피 66%) / COST 1 (공격력 18% x3)'
+            },
+            inferno: {
+                name: '지옥불 기사 (Inferno Rider)',
+                element: '용융',
+                setEffect: '용암의 잔향 5세트 (용융 피해 +10%, 공명 스킬 사용 후 용융 피해 +30%)',
+                skill: '바이크를 탄 지옥불 기사로 변신하여 3단 용융 베기를 가하고, 퇴장 후 다음 캐릭터의 용융 피해 +12% 및 일반 공격 피해 +12%.',
+                stats43311: 'COST 4 (치명타 33%) / COST 3 (용융 30% x2) / COST 1 (공격력 18% x2)',
+                stats44111: 'COST 4 (치명타 33% + 치피 66%) / COST 1 (공격력 18% x3)'
+            },
+            mephis: {
+                name: '뇌음의 메피스 (Thundering Mephis)',
+                element: '전도',
+                setEffect: '벼락의 파동 5세트 (전도 피해 +10%, 일반 공격/강공격 시 전도 피해 +15% 2중첩)',
+                skill: '전뇌 상태로 변신해 속사 전도 타격을 가하며, 파티원의 전도 피해 +12% 및 공명 해방 피해 +12% 증가.',
+                stats43311: 'COST 4 (치명타 피해 66%) / COST 3 (전도 30% x2) / COST 1 (공격력 18% x2)',
+                stats44111: 'COST 4 (치명타 33% + 치피 66%) / COST 1 (공격력 18% x3)'
+            },
+            crownless: {
+                name: '무망자 (Crownless)',
+                element: '인멸',
+                setEffect: '인멸의 구름 5세트 (인멸 피해 +10%, 일반 공격/강공격 시 인멸 피해 +7.5% 4중첩)',
+                skill: '무망자로 변신해 연속 4단 인멸 참격을 날리고 공중 연계 타격. 인멸 속성 공명자의 변주 스킬 후 피해량 폭발.',
+                stats43311: 'COST 4 (치명타 33%) / COST 3 (인멸 30% x2) / COST 1 (공격력 18% x2)',
+                stats44111: 'COST 4 (치명타 33% + 치피 66%) / COST 1 (공격력 18% x3)'
+            },
+            feilian: {
+                name: '기류의 집행자 (Feilian Beringal)',
+                element: '기류',
+                setEffect: '바람을 가르는 사냥꾼 5세트 (기류 피해 +10%, 변주 스킬 사용 후 기류 피해 +30%)',
+                skill: '강력한 기류 고릴라로 변신해 내려찍기 타격을 가하고, 파티 전체 기류 피해 +12% 및 강공격 피해 +12% 버프.',
+                stats43311: 'COST 4 (치명타 33%) / COST 3 (기류 30% x2) / COST 1 (공격력 18% x2)',
+                stats44111: 'COST 4 (치명타 33% + 치피 66%) / COST 1 (공격력 18% x3)'
+            },
+            bell_borne: {
+                name: '종소리의 카메리아 (Bell-Borne Geochelone)',
+                element: '응결/보호',
+                setEffect: '구름의 자태 5세트 (반주 스킬 사용 후 다음 캐릭터 공격력 +22.5%)',
+                skill: '거대 거북이의 종소리를 울려 파티 전체 피격 피해 -50% 감소 및 피해 +10% 보호막을 15초간 부여.',
+                stats43311: 'COST 4 (치명타 33%) / COST 3 (공명 효율 32% x2) / COST 1 (HP 18% x2)',
+                stats44111: 'COST 4 (치명타 33% + 치피 66%) / COST 1 (HP 18% x3)'
+            },
+            xuanfang: {
+                name: '현방 기계룡 (Xuanfang Mecha)',
+                element: '전도 (몽주)',
+                setEffect: '몽주 기술 공명 5세트 (전도/스킬 피해 +15%, 오프필드 협동 피해 +25%)',
+                skill: '현방 드론을 소환하여 오프필드 전도 유도탄을 연사하고 파티 전체 공명 효율 +15% 증폭.',
+                stats43311: 'COST 4 (치명타 33%) / COST 3 (전도 30% + 공효 32%) / COST 1 (공격력 18% x2)',
+                stats44111: 'COST 4 (치명타 33% + 치피 66%) / COST 1 (공격력 18% x3)'
+            }
+        };
+
+        // --- State Management ---
+        let selectedRegion = 'ALL';
+        let selectedRarity = 'ALL';
+        let selectedElement = 'ALL';
+        let selectedRole = 'ALL';
+        let searchQuery = '';
+        let favorites = JSON.parse(localStorage.getItem('wuwa_j_m_favs') || '[]');
+        let showFavsOnly = false;
+        let activeEchoCostConfig = '43311';
+
+        function renderRoster() {
+            const grid = document.getElementById('resonatorGrid');
+            grid.innerHTML = '';
+
+            const filtered = resonators.filter(c => {
+                const matchRegion = selectedRegion === 'ALL' || c.region === selectedRegion;
+                const matchRarity = selectedRarity === 'ALL' || c.rarity === selectedRarity;
+                const matchElem = selectedElement === 'ALL' || c.element === selectedElement;
+                const matchRole = selectedRole === 'ALL' || c.role.includes(selectedRole);
+                const matchSearch = c.name.toLowerCase().includes(searchQuery.toLowerCase()) || c.weapon.includes(searchQuery);
+                const matchFav = !showFavsOnly || favorites.includes(c.id);
+                return matchRegion && matchRarity && matchElem && matchRole && matchSearch && matchFav;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full py-12 text-center text-slate-500">
+                    <i class="fa-solid fa-yin-yang text-3xl mb-2 text-slate-600"></i>
+                    <p>조건에 일치하는 금주 & 몽주 공명자가 없습니다.</p>
+                </div>`;
+                return;
+            }
+
+            filtered.forEach(c => {
+                const isFav = favorites.includes(c.id);
+                const card = document.createElement('div');
+                card.className = `card-glow bg-[#0f141f] border border-[#1e293b] rounded-2xl p-4 flex flex-col justify-between transition duration-200 glass-panel ${c.bgGradient} relative group cursor-pointer`;
+                
+                card.onclick = (e) => {
+                    if (e.target.closest('.fav-btn')) return;
+                    openCharModal(c);
+                };
+
+                let elemColor = 'text-amber-300 border-amber-500/40 bg-amber-950/40';
+                if(c.element === '용융') elemColor = 'text-orange-300 border-orange-500/40 bg-orange-950/40';
+                if(c.element === '기류') elemColor = 'text-emerald-300 border-emerald-500/40 bg-emerald-950/40';
+                if(c.element === '응결') elemColor = 'text-blue-300 border-blue-500/40 bg-blue-950/40';
+                if(c.element === '전도') elemColor = 'text-purple-300 border-purple-500/40 bg-purple-950/40';
+                if(c.element === '인멸') elemColor = 'text-rose-300 border-rose-500/40 bg-rose-950/40';
+
+                const regionBadge = c.region === '금주' ? 'text-amber-300 bg-amber-950/60 border-amber-500/40' : 'text-emerald-300 bg-emerald-950/60 border-emerald-500/40';
+
+                card.innerHTML = `
+                    <button class="fav-btn absolute top-3 right-3 text-sm p-1 text-slate-600 hover:text-amber-400 transition z-10" onclick="toggleFavorite('${c.id}')">
+                        <i class="${isFav ? 'fa-solid text-amber-400' : 'fa-regular'} fa-star"></i>
+                    </button>
+                    <div>
+                        <div class="flex items-center gap-1.5 mb-2">
+                            <span class="text-[10px] px-2 py-0.5 rounded-full border font-bold ${regionBadge}">${c.region}</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-full border font-semibold ${elemColor}">${c.element}</span>
+                            <span class="text-[10px] font-bold ${c.rarity === '5★' ? 'text-amber-400' : 'text-purple-400'}">${c.rarity}</span>
+                        </div>
+                        <h3 class="font-bold text-white text-base group-hover:text-amber-300 transition mb-0.5">${c.name}</h3>
+                        <p class="text-xs text-slate-400 mb-3">${c.role} · ${c.weapon}</p>
+                    </div>
+                    <div class="pt-3 border-t border-[#1e293b]/60 text-[11px] text-slate-400 space-y-1">
+                        <div class="truncate"><span class="text-slate-500">전무:</span> ${c.sigWeapon}</div>
+                        <div class="truncate text-amber-300/80"><span class="text-slate-500">에코:</span> ${c.echoSet}</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function toggleFavorite(id) {
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(f => f !== id);
+            } else {
+                favorites.push(id);
+            }
+            localStorage.setItem('wuwa_j_m_favs', JSON.stringify(favorites));
+            renderRoster();
+        }
+
+        function toggleFavoriteFilter() {
+            showFavsOnly = !showFavsOnly;
+            const btn = document.getElementById('favFilterBtn');
+            if (showFavsOnly) {
+                btn.classList.add('border-amber-400', 'bg-amber-950/50', 'text-amber-300');
+            } else {
+                btn.classList.remove('border-amber-400', 'bg-amber-950/50', 'text-amber-300');
+            }
+            renderRoster();
+        }
+
+        function setRegionFilter(reg) {
+            selectedRegion = reg;
+            document.querySelectorAll('.region-btn').forEach(b => {
+                b.classList.remove('active', 'border-amber-500/50', 'bg-amber-950/60', 'text-amber-300');
+            });
+            event.target.classList.add('active', 'border-amber-500/50', 'bg-amber-950/60', 'text-amber-300');
+            renderRoster();
+        }
+
+        function setRarityFilter(rarity) {
+            selectedRarity = selectedRarity === rarity ? 'ALL' : rarity;
+            renderRoster();
+        }
+
+        function setElementFilter(elem) {
+            selectedElement = elem;
+            document.querySelectorAll('.elem-btn').forEach(b => {
+                b.classList.remove('active', 'border-amber-500/50', 'bg-amber-950/40', 'text-amber-300');
+            });
+            event.target.classList.add('active', 'border-amber-500/50', 'bg-amber-950/40', 'text-amber-300');
+            renderRoster();
+        }
+
+        function setRoleFilter(role) {
+            selectedRole = role;
+            document.querySelectorAll('.role-btn').forEach(b => {
+                b.classList.remove('active', 'border-amber-500/50', 'bg-amber-950/40', 'text-amber-300');
+            });
+            event.target.classList.add('active', 'border-amber-500/50', 'bg-amber-950/40', 'text-amber-300');
+            renderRoster();
+        }
+
+        function applyFilters() {
+            searchQuery = document.getElementById('searchInput').value;
+            renderRoster();
+        }
+
+        function openCharModal(c) {
+            const modal = document.getElementById('charModal');
+            const content = document.getElementById('modalContent');
+
+            content.innerHTML = `
+                <div class="space-y-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#1e293b] pb-4">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-xs px-2.5 py-0.5 rounded-full border border-amber-500/40 bg-amber-950/40 text-amber-300 font-bold">${c.region}</span>
+                                <span class="text-xs px-2.5 py-0.5 rounded-full border border-emerald-500/40 bg-emerald-950/40 text-emerald-300 font-bold">${c.element}</span>
+                                <span class="text-xs text-amber-400 font-bold">${c.rarity}</span>
+                            </div>
+                            <h2 class="text-2xl font-black text-white gold-glow">${c.name}</h2>
+                        </div>
+                    </div>
+
+                    <p class="text-sm text-slate-300 bg-[#080a0f] p-3.5 rounded-xl border border-[#1e293b] leading-relaxed">
+                        ${c.description}
+                    </p>
+
+                    <!-- Weapons & Echoes Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Weapons -->
+                        <div class="bg-[#080a0f] p-4 rounded-xl border border-[#1e293b]">
+                            <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-crosshair"></i> 추천 무기
+                            </h4>
+                            <p class="text-sm text-white font-semibold mb-1"><span class="text-xs text-amber-400">전용:</span> ${c.sigWeapon}</p>
+                            <p class="text-xs text-slate-400"><span class="text-xs text-slate-500">대체:</span> ${c.altWeapon}</p>
+                        </div>
+
+                        <!-- Echoes -->
+                        <div class="bg-[#080a0f] p-4 rounded-xl border border-[#1e293b]">
+                            <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-dragon"></i> 추천 에코 세트 & 주 에코
+                            </h4>
+                            <p class="text-sm text-white font-semibold mb-1">${c.echoSet}</p>
+                            <p class="text-xs text-slate-400"><span class="text-xs text-slate-500">주 에코:</span> ${c.mainEcho}</p>
+                        </div>
+                    </div>
+
+                    <!-- Echo Stats & Priorities -->
+                    <div class="bg-[#080a0f] p-4 rounded-xl border border-[#1e293b] space-y-3">
+                        <div>
+                            <h4 class="text-xs font-bold text-purple-400 uppercase tracking-wider mb-1">에코 옵션 세팅</h4>
+                            <p class="text-xs text-slate-300 font-medium">${c.mainStats}</p>
+                            <p class="text-xs text-slate-400 mt-1"><span class="text-slate-500">유효 부옵션:</span> ${c.subStats}</p>
+                        </div>
+                        <div class="pt-2 border-t border-[#1e293b]">
+                            <h4 class="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-1">스킬 트레이스 우선순위</h4>
+                            <p class="text-xs text-amber-200 font-mono font-semibold">${c.skills}</p>
+                        </div>
+                    </div>
+
+                    <!-- Team Synergy -->
+                    <div class="bg-[#080a0f] p-4 rounded-xl border border-[#1e293b]">
+                        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                            <i class="fa-solid fa-users"></i> 최적 추천 시너지 파티원
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${c.teamSynergy.map(s => `<span class="text-xs bg-[#0f141f] border border-[#1e293b] text-amber-300 px-3 py-1 rounded-xl font-medium">${s}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.remove('opacity-0'), 10);
+        }
+
+        function closeCharModal() {
+            const modal = document.getElementById('charModal');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 200);
+        }
+
+        function initCalcSelects() {
+            const select = document.getElementById('calcCharSelect');
+            select.innerHTML = resonators.map(r => `<option value="${r.id}">${r.name} (${r.region} / ${r.element} / ${r.rarity})</option>`).join('');
+            updateCalcResults();
+        }
+
+        function updateCalcResults() {
+            const charId = document.getElementById('calcCharSelect').value;
+            const targetLv = parseInt(document.getElementById('calcTargetLv').value);
+            const traceStart = parseInt(document.getElementById('calcTraceStart').value);
+            const traceTarget = parseInt(document.getElementById('calcTraceTarget').value);
+
+            document.getElementById('targetLvLabel').textContent = `Lv. ${targetLv}`;
+
+            const char = resonators.find(r => r.id === charId);
+            document.getElementById('selectedCharBadge').textContent = char ? `${char.name} (${char.region})` : '';
+
+            const lvDiff = Math.max(0, targetLv - 1);
+            const traceDiff = Math.max(0, traceTarget - traceStart);
+
+            const isFiveStar = char && char.rarity === '5★';
+            const multiplier = isFiveStar ? 1.2 : 1.0;
+
+            const shellCredits = Math.floor(((lvDiff * 22000) + (traceDiff * 190000)) * multiplier);
+            const expPotion = Math.ceil((lvDiff * 4.5) * multiplier);
+            const bossMaterial = Math.ceil((lvDiff * 0.8) * multiplier);
+            const skillMats = Math.ceil((traceDiff * 18) * multiplier);
+            const weeklyBossMats = Math.ceil(traceDiff * 1.5);
+
+            const grid = document.getElementById('matResultsGrid');
+            grid.innerHTML = `
+                <div class="bg-[#0f141f] p-3 rounded-xl border border-[#1e293b]">
+                    <div class="text-xs text-slate-400 mb-1">클렘 클럽 코인 (Shell)</div>
+                    <div class="text-base font-bold text-amber-400 font-mono">${shellCredits.toLocaleString()}</div>
+                </div>
+                <div class="bg-[#0f141f] p-3 rounded-xl border border-[#1e293b]">
+                    <div class="text-xs text-slate-400 mb-1">고급 공명 물약 (EXP)</div>
+                    <div class="text-base font-bold text-sky-400 font-mono">${expPotion} 개</div>
+                </div>
+                <div class="bg-[#0f141f] p-3 rounded-xl border border-[#1e293b]">
+                    <div class="text-xs text-slate-400 mb-1">${char ? char.region : ''} 보스 돌파 소재</div>
+                    <div class="text-base font-bold text-emerald-400 font-mono">${bossMaterial} 개</div>
+                </div>
+                <div class="bg-[#0f141f] p-3 rounded-xl border border-[#1e293b]">
+                    <div class="text-xs text-slate-400 mb-1">무기/스킬 트레이스 재료</div>
+                    <div class="text-base font-bold text-purple-400 font-mono">${skillMats} 개</div>
+                </div>
+                <div class="bg-[#0f141f] p-3 rounded-xl border border-[#1e293b]">
+                    <div class="text-xs text-slate-400 mb-1">주간 보스 육성 소재</div>
+                    <div class="text-base font-bold text-rose-400 font-mono">${weeklyBossMats} 개</div>
+                </div>
+            `;
+        }
+
+        function setEchoCostConfig(config) {
+            activeEchoCostConfig = config;
+            document.getElementById('costConfig43311').className = config === '43311' ? 'flex-1 py-1.5 rounded-lg border border-amber-500/50 bg-amber-950/40 text-amber-300 text-xs font-bold' : 'flex-1 py-1.5 rounded-lg border border-[#1e293b] bg-[#0f141f] text-slate-400 text-xs font-bold';
+            document.getElementById('costConfig44111').className = config === '44111' ? 'flex-1 py-1.5 rounded-lg border border-amber-500/50 bg-amber-950/40 text-amber-300 text-xs font-bold' : 'flex-1 py-1.5 rounded-lg border border-[#1e293b] bg-[#0f141f] text-slate-400 text-xs font-bold';
+            renderEchoDetails();
+        }
+
+        function renderEchoDetails() {
+            const echoKey = document.getElementById('mainEchoSelect').value;
+            const echo = echoDatabase[echoKey];
+            const container = document.getElementById('echoDetailDisplay');
+
+            if (!echo) return;
+
+            const selectedStats = activeEchoCostConfig === '43311' ? echo.stats43311 : echo.stats44111;
+
+            container.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex justify-between items-start pb-3 border-b border-[#1e293b]">
+                        <div>
+                            <span class="text-xs font-bold text-amber-400 bg-amber-950/60 border border-amber-500/30 px-2.5 py-0.5 rounded-full mr-2">${echo.element}</span>
+                            <h3 class="text-lg font-bold text-white inline-block">${echo.name}</h3>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#0f141f] p-4 rounded-xl border border-[#1e293b]">
+                        <h4 class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1.5">5세트 활성화 효과</h4>
+                        <p class="text-xs text-slate-200">${echo.setEffect}</p>
+                    </div>
+
+                    <div class="bg-[#0f141f] p-4 rounded-xl border border-[#1e293b]">
+                        <h4 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-1.5">주에코 전용 액티브 스킬</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">${echo.skill}</p>
+                    </div>
+
+                    <div class="bg-[#0f141f] p-4 rounded-xl border border-[#1e293b]">
+                        <h4 class="text-xs font-bold text-purple-400 uppercase tracking-wider mb-1.5">선택 구성 (${activeEchoCostConfig}) 목표 주옵션</h4>
+                        <p class="text-xs text-amber-300 font-mono font-semibold">${selectedStats}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function initTeamBuilder() {
+            for(let i=0; i<3; i++) {
+                const s = document.getElementById(`teamSlot${i}`);
+                s.innerHTML = resonators.map(r => `<option value="${r.id}">${r.name} (${r.region} / ${r.element})</option>`).join('');
+            }
+            document.getElementById('teamSlot0').value = 'jinhsi';
+            document.getElementById('teamSlot1').value = 'zhezhi';
+            document.getElementById('teamSlot2').value = 'baizhi';
+            updateTeamSynergy();
+        }
+
+        function updateTeamSynergy() {
+            const team = [
+                resonators.find(r => r.id === document.getElementById('teamSlot0').value),
+                resonators.find(r => r.id === document.getElementById('teamSlot1').value),
+                resonators.find(r => r.id === document.getElementById('teamSlot2').value)
+            ];
+
+            team.forEach((c, i) => {
+                const container = document.getElementById(`teamCard${i}`);
+                if(c) {
+                    container.innerHTML = `
+                        <div class="text-center">
+                            <span class="text-[10px] px-2 py-0.5 rounded-full border border-amber-500/40 bg-amber-950/40 text-amber-300 font-bold block mb-1">${c.region} | ${c.element}</span>
+                            <h4 class="font-bold text-white text-xs">${c.name}</h4>
+                            <p class="text-[10px] text-slate-400">${c.role}</p>
+                        </div>
+                    `;
+                }
+            });
+
+            // Synergy Check Logic
+            const mainDps = team[0];
+            const subDps = team[1];
+            const support = team[2];
+
+            let score = 'S+';
+            let mainSynergyText = '최상급 속성 및 스킬 피해 연계 구성';
+
+            if (mainDps.id === 'jinhsi' && (subDps.id === 'zhezhi' || subDps.id === 'sanhua')) {
+                mainSynergyText = '금희 전용 오프필드 협동 스택 누적 조합 (최상급 회절 극딜)';
+            } else if (mainDps.id === 'jiyan' && subDps.id === 'mortefi') {
+                mainSynergyText = '기염 청룡 폭주 + 모르테피 강공격 피증 버프 완벽 결합';
+            } else if (mainDps.id === 'qiu_yuan' && subDps.id === 'fu_ling') {
+                mainSynergyText = '몽주·현방 신규 인멸/전도 공명 연계 시너지 발동';
+            } else {
+                score = 'A+';
+                mainSynergyText = '표준 범용 공명자 구성';
+            }
+
+            const details = document.getElementById('teamSynergyDetails');
+            details.innerHTML = `
+                <div class="p-3 bg-[#0f141f] rounded-lg border border-[#1e293b]">
+                    <span class="text-amber-400 font-bold"><i class="fa-solid fa-burst mr-1"></i>메인 연계 시너지:</span>
+                    <span class="text-slate-300 ml-1.5">${mainSynergyText}</span>
+                </div>
+                <div class="p-3 bg-[#0f141f] rounded-lg border border-[#1e293b]">
+                    <span class="text-emerald-400 font-bold"><i class="fa-solid fa-rotate mr-1"></i>반주 스킬 버프:</span>
+                    <span class="text-slate-300 ml-1.5">${subDps.name} 반주 스킬 피증 효과 활성화</span>
+                </div>
+                <div class="p-3 bg-[#0f141f] rounded-lg border border-[#1e293b]">
+                    <span class="text-cyan-400 font-bold"><i class="fa-solid fa-shield-heart mr-1"></i>파티 유지력:</span>
+                    <span class="text-slate-300 ml-1.5">${support.role.includes('힐러') || support.role.includes('서포터') ? '보호막/치유 완비' : '딜 위주 세팅'}</span>
+                </div>
+                <div class="p-3 bg-[#0f141f] rounded-lg border border-[#1e293b]">
+                    <span class="text-purple-400 font-bold"><i class="fa-solid fa-yin-yang mr-1"></i>지역 공명:</span>
+                    <span class="text-slate-300 ml-1.5">${mainDps.region} 및 ${subDps.region} 연계 적용</span>
+                </div>
+            `;
+
+            document.getElementById('synergyScoreBadge').textContent = `시너지 등급: ${score}`;
+        }
+
+        // Tab Switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-tab').forEach(b => {
+                b.classList.remove('text-amber-300', 'bg-amber-950/40', 'border', 'border-amber-500/40');
+                b.classList.add('text-slate-400');
+            });
+            const activeBtn = document.getElementById(`tabBtn-${tabId}`);
+            if(activeBtn) {
+                activeBtn.classList.add('text-amber-300', 'bg-amber-950/40', 'border', 'border-amber-500/40');
+            }
+        }
+
+        window.onload = function() {
+            renderRoster();
+            initCalcSelects();
+            renderEchoDetails();
+            initTeamBuilder();
+        };
+    </script>
+</body>
+</html>
